@@ -1,7 +1,7 @@
 {
-  "name": "dms",
+  "name": "paperless",
   "version": "1.0.0",
-  "description": "UI for a Documant Managemant System",
+  "description": "Documant Managemant System",
   "author": "lawrence bolutife",
   "scripts": {
     "postinstall": "bower install",
@@ -16,6 +16,7 @@
     "chromedriver": "^2.20.0",
     "coveralls": "^2.11.6",
     "dotenv": "^1.2.0",
+    "express": "~4.13.1",
     "gulp": "^3.9.0",
     "gulp-babel": "^6.1.1",
     "gulp-bower": "0.0.10",
