@@ -17,6 +17,8 @@ module.exports = function(config) {
       'karma-coverage',
       'karma-jasmine',
       'karma-chrome-launcher',
+      'karma-firefox-launcher',
+      'karma-phantomjs-launcher',
       'karma-sinon'
     ],
 
@@ -91,7 +93,7 @@ module.exports = function(config) {
     // - Safari
     // - PhantomJS
     // - IE
-    browsers: ['Chrome'], // 'Firefox', 'Safari'],
+    browsers: ['Chrome', 'Firefox'], // 'Firefox', 'Safari'],
 
     // https://www.youtube.com/watch?v=FQwZrOAmMAc
     // To turn off chrome's security limitations that do
