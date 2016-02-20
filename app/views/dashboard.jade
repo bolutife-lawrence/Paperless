@@ -1,0 +1,60 @@
+.dashboard(
+  layout="row",
+  ng-init="init()", 
+  flex)
+
+  md-sidenav.md-sidenav-left.md-whiteframe-z2.side-nav(
+    md-component-id="left", 
+    md-is-locked-open="$mdMedia(\"gt-md\")")
+
+    md-toolbar
+      md-button.md-primary(
+        ng-click="close()", 
+        hide-gt-md)
+        i.fa.fa-cancel
+
+      section(layout="row", 
+        layout-align="center center")
+        .image-holder(layout="row" layout-align="center center")
+          img.thumb.md-whiteframe-z2(ng-src="{{currentUser.img_url}}")
+
+      span.small-text.white-color.text-center.bold-text {{currentUser.email}}
+      span.small-text.white-color.text-center(ng-if="currentUser.name") {{currentUser.name.last + " " + currentUser.name.first}}
+      span.small-text.white-color.text-center(ng-if="currentUser.role.length > 0") {{currentUser.role[0].title}} (Role)
+
+      br
+
+      span.text-center 
+        i.fa.fa-facebook(ng-if="currentUser.facebook.id") &nbsp;
+        i.fa.fa-google-plus(ng-if="currentUser.google.id")
+
+    md-content
+      md-list
+        a(
+          ng-repeat="item in menuItems",
+            ui-sref="{{item.link}}")
+          md-list-item(md-ink-ripple)
+            md-item-content(layout="row" layout-align="start center")
+              .inset
+                span(class="{{item.icon}}")
+              .inset 
+                | {{item.title}}
+
+          md-divider
+
+        a(ng-click="logout()")
+          md-list-item(md-ink-ripple)
+            md-item-content(
+              layout="row",
+              layout-align="start center")
+              .inset
+                span
+                  i.fa.fa-sign-out
+              .inset
+                | Logout
+
+  md-content.main-content#scroll-container(
+    layout="column",
+    layout-padding,
+    ui-view="dashboard-innner-view", 
+    flex)

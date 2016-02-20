@@ -1,0 +1,170 @@
+.user-profile(
+  layout="column", 
+  layout-align"center center", 
+  flex="100", 
+  ng-init="init()",
+  ng-cloak)
+
+  .form-content
+
+    form(
+      name="updateUserForm",
+      ng-submit="updateUser()")
+
+      .change-password(ng-hide="currentUser.google.id || currentUser.facebook.id")
+        md-tooltip
+          | Reset your password
+        i.fa.fa-cogs(ng-click="showPasswordFields()")
+
+      section(
+        layout="row", 
+        layout-align="center center")
+
+        .image-container.md-whiteframe-3dp
+          .image-overlay
+
+            i.fa.fa-cloud-upload(
+              ngf-select="changeProfilePic($file)", 
+              ng-model="file",
+              name="file",
+              ngf-pattern="\"image/*\"", 
+              ngf-accept="\"image/*\"", 
+              ngf-max-size="10MB", 
+              ngf-min-height="100", 
+              ngf-resize="{width: 100, height: 100}")
+
+            i.fa.fa-trash-o(
+              ng-if="currentUser.img_public_id", 
+              ng-click="removeProfilePic(imgPublicId)")
+
+          img(ng-src="{{currentUser.img_url}}")
+
+      span.line
+      span.small-text.profile-info-text Profile information
+      span.line
+
+      p
+
+      section(layout="row")
+
+        md-input-container.md-block
+          md-icon
+            i.fa.fa-user
+          input(
+            ng-model="currentUser.name.last",
+            name="lastname",
+            type="text", 
+            ng-minlength="2",
+            ng-maxlength="50",
+            ng-required="{{!currentUser.name.last}}",
+            ng-pattern="/^[A-z]+$/",
+            placeholder="Lastname",
+            aria-label="Lastname")
+
+        md-input-container.md-block
+          md-icon
+            i.fa.fa-user
+          input(
+            ng-model="currentUser.name.first",
+            name="firstname",
+            type="text",
+            ng-minlength="2", 
+            ng-maxlength="50",
+            ng-required="{{!currentUser.name.first}}",
+            ng-pattern="/^[A-z]+$/",
+            placeholder="Firstname", 
+            aria-label="Firstname")
+
+      md-input-container.md-block
+        md-icon
+          i.fa.fa-envelope
+        input(
+          ng-model="currentUser.email",
+          name="email",
+          type="email", 
+          ng-required="{{!currentUser.email}}",
+          ng-minlength="2",
+          ng-maxlength="100",
+          placeholder="Email",
+          aria-label="user.email")
+
+      md-input-container.md-block(ng-hide="currentUser.role.length > 0")
+        md-icon
+          i.fa.fa-user-secret
+        md-select(
+          placeholder="Select a role", 
+          ng-model="currentUser.role[0].title",
+          name="role",
+          ng-required="{{currentUser.role.length < 1}}",
+          md-on-open="loadRoles()")
+
+          md-option(
+            ng-value="role.title", 
+            ng-repeat="role in roles track by role._id") {{role.title}}
+
+      div(ng-if="resetPassword")
+
+        p
+
+        span.line
+        span.small-text.reset-password-text Reset password
+        span.line
+
+        p
+
+        section(layout="row")
+
+          md-input-container.md-block
+            md-icon
+              i.fa.fa-key
+            input(
+              ng-model="currentUser.password", 
+              name="password"
+              type="password",
+              ng-minlength="8", 
+              ng-maxlength="20",
+              ng-pattern="/(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z])/",
+              ng-required="{{resetPassword}}",
+              placeholder="Password", 
+              aria-label="Password")
+
+          md-input-container.md-block
+            md-icon
+              i.fa.fa-key
+            input(
+              ng-model="cpassword"
+              type="password",
+              name="cpassword",
+              ng-required="{{resetPassword}}",
+              placeholder="Confirm password", 
+              aria-label="Confirm password",
+              pw-check="currentUser.password")
+
+      br
+
+      md-button.md-raised.custom-button(
+        type="submit",
+        ng-disabled="!updateUserForm.$valid")
+        span.login-signup-text &nbsp; Save changes
+
+.error-messages.small-text.text-center.error-message-color
+  p.animated.zoomIn(ng-show="updateUserForm.lastname.$error.required && updateUserForm.lastname.$dirty") Lastname is required
+  p.animated.zoomIn(ng-show="!updateUserForm.lastname.$error.required && (updateUserForm.lastname.$error.minlength || updateUserForm.lastname.$error.maxlength) && updateUserForm.lastname.$dirty")
+    | Lastname must be between 2 and 50 characters.
+  p.animated.zoomIn(ng-show="!updateUserForm.lastname.$error.required && !updateUserForm.lastname.$error.minlength && !updateUserForm.lastname.$error.maxlength && updateUserForm.lastname.$error.pattern && updateUserForm.lastname.$dirty")
+    | Lastname cannot contain special characters (a number or a symbol.)
+  p.animated.zoomIn(ng-show="updateUserForm.firstname.$error.required && updateUserForm.firstname.$dirty") Firstname is required
+  p.animated.zoomIn(ng-show="!updateUserForm.firstname.$error.required && (updateUserForm.firstname.$error.minlength || updateUserForm.firstname.$error.maxlength) && updateUserForm.firstname.$dirty")
+    | Firstname must be between 2 and 50 characters.
+  p.animated.zoomIn(ng-show="!updateUserForm.firstname.$error.required && !updateUserForm.firstname.$error.minlength && !updateUserForm.firstname.$error.maxlength && updateUserForm.firstname.$error.pattern && updateUserForm.firstname.$dirty")
+    | Firstname cannot contain special characters (a number or a symbol.)
+  p.animated.zoomIn(ng-show="updateUserForm.role.$error.required") Kindly select a role.
+  p.animated.zoomIn(ng-show="updateUserForm.email.$error.required && updateUserForm.email.$dirty") Email is required
+  p.animated.zoomIn(ng-show="updateUserForm.email.$error.email && updateUserForm.email.$dirty") Invalid email
+  p.animated.zoomIn(ng-show="updateUserForm.password.$error.required && updateUserForm.password.$dirty") Password is required
+  p.animated.zoomIn(ng-show="!updateUserForm.password.$error.required && (updateUserForm.password.$error.minlength || updateUserForm.password.$error.maxlength) && updateUserForm.password.$dirty")
+    | Passwords must be between 8 and 20 characters.
+  p.animated.zoomIn(ng-show="!updateUserForm.password.$error.required && !updateUserForm.password.$error.minlength && !updateUserForm.password.$error.maxlength && updateUserForm.password.$error.pattern && updateUserForm.password.$dirty")
+    | Password must contain atleast one lowercase and uppercase letter, and one non-alpha character (a number or a symbol.)
+  p.animated.zoomIn(ng-show="updateUserForm.cpassword.$error.required && updateUserForm.cpassword.$dirty") Please confirm your password.
+  p.animated.zoomIn(ng-show="!updateUserForm.cpassword.$error.required && updateUserForm.cpassword.$error.noMatch && updateUserForm.password.$dirty") Passwords do not match.

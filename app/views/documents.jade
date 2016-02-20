@@ -1,0 +1,41 @@
+.user-docs(ng-init="init()")
+
+  .docs-header(layout="row")
+    i.fa.fa-bars.menu-icon(
+      hide-gt-md, 
+      ng-click="toggleNav()")
+    h3 Your documents
+
+    md-input-container.md-block.search-field
+      md-icon
+        i.fa.fa-search
+      input(
+        ng-model="searchText.title", 
+        type="text", 
+        placeholder="Search documents", 
+        aria-label="Search documents")
+
+  md-divider
+
+  div(
+    layout="row",
+    layout-align="center start")
+
+    md-button.toggle-button(ui-sref="dashboard.user-documents.own")
+      span.small-text Owned
+
+    md-button.toggle-button(
+      ng-disabled="currentUser.role.length < 1", 
+      ui-sref="dashboard.user-documents.featured")
+      span.small-text Featured
+
+  div(ui-view="doc-category")
+
+  md-button.md-fab.create-doc(
+    aria-label="Create document",
+    ng-click="loadCreateDocModal($event)",
+    ng-disabled="currentUser.role.length < 1")
+
+    md-tooltip(md-direction="left")
+      span Create a new document
+    i.fa.fa-plus
