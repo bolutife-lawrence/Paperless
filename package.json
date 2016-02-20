@@ -4,7 +4,7 @@
   "description": "Documant Managemant System",
   "author": "lawrence bolutife",
   "scripts": {
-    "postinstall": "bower install",
+    "postinstall": "bower cache clean && bower install",
     "test": "./sh/run-tests.sh",
     "coveralls": "./sh/coveralls.sh"
   },
