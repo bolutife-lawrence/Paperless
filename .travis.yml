@@ -29,6 +29,7 @@ deploy:
   app: paperlesss
   on:
     repo: andela-blawrence/Paperless
+    branch: dev
 after_deploy:
   - gulp heroku
   - "heroku ps:scale web=1 --app paperlesss"
