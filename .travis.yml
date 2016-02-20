@@ -1,5 +1,4 @@
 node_js:
-  - stable
   - "5.0"
 install:
   - npm install
