@@ -1,1 +1,1 @@
-cat ./coverage/lcov-report/lcov.info | ./node_modules/.bin/coveralls
+cat ./coverage/report-lcov/lcov.info | ./node_modules/.bin/coveralls

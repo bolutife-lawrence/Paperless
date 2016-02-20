@@ -5,7 +5,7 @@
   "author": "lawrence bolutife",
   "scripts": {
     "postinstall": "bower install",
-    "test": "gulp test:unit",
+    "test": "./sh/run-tests.sh",
     "coveralls": "./sh/coveralls.sh"
   },
   "license": "MIT",
