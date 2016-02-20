@@ -4,6 +4,7 @@ var gulp = require('gulp'),
   bower = require('gulp-bower'),
   gutil = require('gulp-util'),
   // concat = require('gulp-concat'),
+  chmod = require('gulp-chmod'),
   minify = require('gulp-minify'),
   babelify = require('babelify'),
   notify = require('gulp-notify'),
@@ -52,12 +53,14 @@ gulp.task('less', () => {
     .pipe(less({
       paths: [path.join(__dirname, './app/styles')]
     }))
+    .pipe(chmod(755))
     .pipe(gulp.dest('./public/css'));
 });
 
 gulp.task('jade', () => {
   gulp.src(paths.jade)
     .pipe(jade())
+    .pipe(chmod(755))
     .pipe(gulp.dest('./public/'));
 });
 
@@ -68,17 +71,20 @@ gulp.task('images', () => {
       progressive: true,
       interlaced: true
     }))
+    .pipe(chmod(755))
     .pipe(gulp.dest('./public/images/'));
 });
 
 gulp.task('bower', () => {
   return bower()
+    .pipe(chmod(755))
     .pipe(gulp.dest('public/lib/'));
 });
 
 gulp.task('minifyJs', ['browserify'], () => {
   gulp.src('./public/js/bundle.js')
     .pipe(minify())
+    .pipe(chmod(755))
     .pipe(gulp.dest('./public/js'));
 });
 
@@ -97,6 +103,7 @@ gulp.task('browserify', () => {
       'Error: in browserify gulp task'))
     .pipe(source('bundle.js')) // Desired filename
     // Output the file
+    .pipe(chmod(755))
     .pipe(gulp.dest('./public/js/'));
 });
 
@@ -108,6 +115,7 @@ gulp.task('lint', () => {
 
 gulp.task('static-files', () => {
   return gulp.src(paths.staticFiles)
+    .pipe(chmod(755))
     .pipe(gulp.dest('public/'));
 });
 
