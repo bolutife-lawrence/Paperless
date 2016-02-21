@@ -32,12 +32,12 @@ export default angular.module('paperless.services')
         };
 
         $http.get(`${Api.address}users/${userId}/documents`, params)
-        .then((res) => {
-          cb(null, res);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+          .then((res) => {
+            cb(null, res);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       };
 
       obj.featuredDocs = (roleId, page, limit, cb) => {
@@ -49,12 +49,12 @@ export default angular.module('paperless.services')
         };
 
         $http.get(`${Api.address}users/${roleId}/documents`, params)
-        .then((res) => {
-          cb(null, res);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+          .then((res) => {
+            cb(null, res);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       };
 
       return obj;

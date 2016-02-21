@@ -12,6 +12,8 @@
   require('./controllers/dashboard.controllers');
   require('./controllers/document.controllers');
   require('./controllers/documents.controllers');
+  require('./controllers/own-documents.controllers');
+  require('./controllers/featured-documents.controllers');
   require('./controllers/user-profile.controllers');
 
   // Import Services
@@ -37,6 +39,7 @@
     'paperless.filters',
     'paperless.directives',
     'ui.router',
+    'dc.endlessScroll',
     'ngFileUpload',
     'ngProgress',
     'ngResource',
@@ -101,7 +104,7 @@
         .state('welcome', {
           url: '/',
           controller: 'homeCtrl',
-          templateUrl: 'views/welcome.html'
+          templateUrl: 'views/home.html'
         })
         .state('welcome.login', {
           url: 'users/login',
@@ -165,6 +168,16 @@
         })
         .state('dashboard.user-documents', {
           url: '/documents',
+          views: {
+            'dashboard-innner-view@dashboard': {
+              controller: 'userDocsCtrl',
+              templateUrl: 'views/documents.html',
+              authenticate: true
+            }
+          }
+        })
+        .state('dashboard.user-documents.own', {
+          url: '/own?{page}',
           resolve: {
             ownDocs: [
               '$http',
@@ -178,8 +191,19 @@
                   }
                 });
               }
-            ],
-
+            ]
+          },
+          views: {
+            'doc-category@dashboard.user-documents': {
+              controller: 'ownDocsCtrl',
+              templateUrl: 'views/own-documents.html',
+              authenticate: true
+            }
+          }
+        })
+        .state('dashboard.user-documents.featured', {
+          url: '/featured?{page}',
+          resolve: {
             featuredDocs: [
               '$http',
               '$rootScope',
@@ -187,34 +211,19 @@
                 if ($rootScope.currentUser.role.length > 0) {
                   let roleId = $rootScope.currentUser.role[0]._id,
                     url = `${Api.address}roles/${roleId}/documents`;
-                  return $http.get(url);
+                  return $http.get(url, {
+                    params: {
+                      page: 1,
+                      limit: 10
+                    }
+                  });
                 }
               }
             ]
           },
           views: {
-            'dashboard-innner-view@dashboard': {
-              controller: 'userDocsCtrl',
-              templateUrl: 'views/user-documents.html',
-              authenticate: true
-            }
-          }
-        })
-        .state('dashboard.user-documents.own', {
-          url: '/own',
-          views: {
             'doc-category@dashboard.user-documents': {
-              controller: 'userDocsCtrl',
-              templateUrl: 'views/own-documents.html',
-              authenticate: true
-            }
-          }
-        })
-        .state('dashboard.user-documents.featured', {
-          url: '/featured',
-          views: {
-            'doc-category@dashboard.user-documents': {
-              controller: 'userDocsCtrl',
+              controller: 'featuredDocsCtrl',
               templateUrl: 'views/featured-documents.html',
               authenticate: true
             }
