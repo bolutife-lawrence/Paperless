@@ -5,6 +5,7 @@ logs
 .jsbeautifyrc
 public/
 .DS_Store
+uploads
 
 # Runtime data
 pids

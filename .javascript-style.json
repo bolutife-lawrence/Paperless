@@ -12,10 +12,13 @@
   "noarg": true,
   "noempty": true,
   "nonew": true,
+  "esnext": true,
   "predef": [
     "$",
     "jQuery",
     "jasmine",
+    "spyOn",
+    "swal",
     "beforeEach",
     "describe",
     "expect",

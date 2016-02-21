@@ -8,11 +8,11 @@
       .no-docs-msg-container
         .icon-holder
           i.fa.fa-folder-open-o.fa-5x
-        span {{noFeaturedDocsMsg}}
+        span {{noDocsMsg}}
 
   .outter-doc-card(
     ng-if="featuredDocs.length > 0", 
-    ng-repeat="doc in featuredDocs | filter: searchText:strict")
+    endless-scroll="doc in featuredDocs | filter: searchText:strict")
 
     .inner-doc-card
       md-content.doc-card
@@ -29,4 +29,6 @@
           aria-label="View document")
           i.fa.fa-eye
 
-  i.fa.fa-circle-o-notch.fa-spin.fa-4x.loading-icon(ng-show="isLoading")
+  .text-center(ng-show="isLoading")
+    i.fa.fa-circle-o-notch.fa-spin.fa-4x.loading-icon
+    p Loading...

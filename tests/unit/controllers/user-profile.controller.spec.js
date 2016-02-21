@@ -35,7 +35,7 @@ describe('User profile controller', () => {
     Roles,
     ngProgressFactory,
     Avatar,
-    $httpBackend;
+    httpBackend;
 
   beforeEach(module('paperless'));
 
@@ -161,7 +161,8 @@ describe('User profile controller', () => {
     Auth = $injector.get('Auth');
     state = $injector.get('$state');
     Avatar = $injector.get('Avatar');
-    $httpBackend = $injector.get('$httpBackend');
+    httpBackend = $injector.get('$httpBackend');
+    httpBackend.expectGET('views/home.html').respond(200);
 
     controller = $controller('userProfileCtrl', {
       $scope: scope,
@@ -201,10 +202,6 @@ describe('User profile controller', () => {
       expect(scope.currentUser.img_url).toBeDefined();
       expect(scope.currentUser.img_public_id).toBe(null);
       expect(scope.imgPublicId).not.toBeDefined();
-      $httpBackend.expectGET('views/welcome.html')
-        .respond({
-          view: true
-        });
       scope.changeProfilePic(true);
       expect(Avatar.uploadImage).toHaveBeenCalled();
       expect(scope.currentUser.img_url).toBe('img_url_has_now_been_changed');
@@ -226,10 +223,6 @@ describe('User profile controller', () => {
       expect(scope.currentUser.img_url).toBeDefined();
       expect(scope.currentUser.img_public_id).toBe('jdbferkjb99');
       expect(scope.imgPublicId).toBeDefined();
-      $httpBackend.expectGET('views/welcome.html')
-        .respond({
-          view: true
-        });
       scope.removeProfilePic(true);
       expect(Avatar.removeImage).toHaveBeenCalled();
       expect(scope.currentUser.img_url).toBe(defaultImgUrl);
