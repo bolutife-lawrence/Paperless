@@ -48,13 +48,18 @@ export default angular.module('paperless.controllers')
       };
 
       $scope.callFunction = (name) => {
-        if (angular.isFunction($scope[name])) $scope[name].call();
+        if (angular.isFunction($scope[name])) {
+          $scope[name].call();
+        }
       };
 
       $scope.toggle = (item, list) => {
         var index = list.indexOf(item.title);
-        if (index > -1) list.splice(index, 1);
-        else list.push(item.title);
+        if (index > -1) {
+          list.splice(index, 1);
+        } else {
+          list.push(item.title);
+        }
       };
 
       $scope.exists = (item, list) => list.indexOf(item.title) > -1;
@@ -66,13 +71,18 @@ export default angular.module('paperless.controllers')
       $scope.getFeaturedUsers = () => {
         let _roles = $scope.viewDoc.roles.map((role) => role._id);
         Users.featuredUsers(_roles, (err, res) => {
-          if (!err) $scope.featuredUsers = res.data.users.docs;
+          if (!err) {
+            $scope.featuredUsers = res.data.users.docs;
+          }
         });
       };
 
       $scope.getSelectedRoles = () => {
         $scope.selectedRoles = [];
-        if ($scope.viewDoc.length < 1) return;
+        if ($scope.viewDoc.length < 1) {
+          return;
+        }
+
         let selectedRoles = $scope.viewDoc.roles.map((role) => role.title);
         $scope.selectedRoles = selectedRoles;
       };
@@ -81,7 +91,9 @@ export default angular.module('paperless.controllers')
         Documents.get({
           id: $stateParams.doc_id
         }, res => {
-          if (res.success) $scope.viewDoc = res.doc;
+          if (res.success) {
+            $scope.viewDoc = res.doc;
+          }
           $scope.getFeaturedUsers();
           $scope.getSelectedRoles();
           $scope.getDocOwner();

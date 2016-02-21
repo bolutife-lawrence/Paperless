@@ -24,8 +24,11 @@ describe('Login controller', () => {
             }
           };
 
-        if (user) cb(_user);
-        else cbb(err);
+        if (user) {
+          cb(_user);
+        } else {
+          cbb(err);
+        }
       }
     },
     Auth,

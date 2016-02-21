@@ -54,7 +54,10 @@ export default angular.module('paperless.controllers')
             $scope.progressBar.start();
             var progess = parseInt(100.0 * evt.loaded / evt.total);
             $scope.progressBar.set(progess);
-            if (progess === 100) $scope.progressBar.complete();
+            
+            if (progess === 100) {
+              $scope.progressBar.complete();
+            }
           });
       };
 

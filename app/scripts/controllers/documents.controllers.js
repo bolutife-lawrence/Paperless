@@ -9,7 +9,10 @@ export default angular.module('paperless.controllers')
     ) => {
 
       $scope.highlight = (text, search) => {
-        if (!search) return $sce.trustAsHtml(text);
+        if (!search) {
+          return $sce.trustAsHtml(text);
+        }
+        
         var replace = text
           .replace(new RegExp(search, 'gi'),
             '<span class="highlighted-text">$&</span>');
