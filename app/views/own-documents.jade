@@ -12,7 +12,7 @@
 
   .outter-doc-card(
     ng-if="ownDocs.length > 0",
-    ng-repeat="doc in ownDocs | filter: searchText:strict")
+    endless-scroll="doc in ownDocs | filter: searchText:strict")
 
     .inner-doc-card
       md-content.doc-card
@@ -29,4 +29,6 @@
           aria-label="View document")
           i.fa.fa-eye
 
-  i.fa.fa-circle-o-notch.fa-spin.fa-4x.loading-icon(ng-show="isLoading")
+  .text-center(ng-show="isLoading")
+    i.fa.fa-circle-o-notch.fa-spin.fa-4x.loading-icon
+    p Loading...

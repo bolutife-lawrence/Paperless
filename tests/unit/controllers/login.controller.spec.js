@@ -32,7 +32,8 @@
         fbLogin: () => {},
         gLogin: () => {}
       },
-      Auth;
+      Auth,
+      httpBackend;
 
     beforeEach(() => {
       module('paperless');
@@ -40,6 +41,9 @@
 
     beforeEach(inject(($injector, $rootScope, $controller) => {
       scope = $rootScope.$new();
+      httpBackend = $injector.get('$httpBackend');
+      httpBackend.expectGET('views/home.html').respond(200);
+
       controller = $controller('loginCtrl', {
         $scope: scope,
         Users: Users

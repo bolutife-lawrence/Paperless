@@ -10,7 +10,7 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['jasmine', 'sinon'],
+    frameworks: ['jasmine'],
 
     plugins: [
       'karma-babel-preprocessor',
@@ -20,26 +20,6 @@ module.exports = function(config) {
       'karma-firefox-launcher',
       'karma-phantomjs-launcher',
       'karma-sinon'
-    ],
-
-
-    // list of files / patterns to load in the browser
-    files: [
-      'public/lib/angular/angular.min.js',
-      'public/lib/angular-mocks/angular-mocks.js',
-      'public/lib/angular-ui-router/release/angular-ui-router.min.js',
-      'public/lib/angular-aria/angular-aria.min.js',
-      'public/lib/angular-route/angular-route.min.js',
-      'public/lib/angular-animate/angular-animate.min.js',
-      'public/lib/angular-material/angular-material.min.js',
-      'public/lib/angular-resource/angular-resource.min.js',
-      'public/lib/angular-file-upload/dist/angular-file-upload.min.js',
-      'public/lib/sweetalert/dist/sweetalert.min.js',
-      'public/lib/ng-file-upload/ng-file-upload.min.js',
-      'public/lib/ng-file-upload-shim/ng-file-upload-shim.min.js',
-      'public/lib/ngprogress/build/ngprogress.min.js',
-      'public/js/bundle.js',
-      'tests/unit/**/*.spec.js'
     ],
 
 
@@ -93,7 +73,7 @@ module.exports = function(config) {
     // - Safari
     // - PhantomJS
     // - IE
-    browsers: ['Chrome', 'Firefox'], // 'Firefox', 'Safari'],
+    browsers: ['Chrome', 'Firefox'], // 'Safari'],
 
     // https://www.youtube.com/watch?v=FQwZrOAmMAc
     // To turn off chrome's security limitations that do

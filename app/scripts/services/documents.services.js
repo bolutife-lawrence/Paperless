@@ -6,7 +6,7 @@ export default angular.module('paperless.services')
       $resource,
       $http,
       Api) => {
-        
+
       var obj = $resource(`${Api.address}documents/:id`, {
         id: '@id'
       }, {
@@ -32,12 +32,29 @@ export default angular.module('paperless.services')
         };
 
         $http.get(`${Api.address}users/${userId}/documents`, params)
-        .then((res) => {
-          cb(null, res);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+          .then((res) => {
+            cb(null, res);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      };
+
+      obj.featuredDocs = (roleId, page, limit, cb) => {
+        var params = {
+          params: {
+            page: page,
+            limit: limit || 10
+          }
+        };
+
+        $http.get(`${Api.address}users/${roleId}/documents`, params)
+          .then((res) => {
+            cb(null, res);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       };
 
       return obj;
