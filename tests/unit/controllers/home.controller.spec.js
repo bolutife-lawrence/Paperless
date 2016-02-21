@@ -2,7 +2,8 @@ describe('Login controller', () => {
 
   var scope,
     controller,
-    state;
+    state,
+    httpBackend;
 
   beforeEach(() => {
     module('paperless');
@@ -10,6 +11,9 @@ describe('Login controller', () => {
 
   beforeEach(inject(($injector, $rootScope, $controller) => {
     scope = $rootScope.$new();
+    httpBackend = $injector.get('$httpBackend');
+    httpBackend.expectGET('views/home.html').respond(200);
+
     controller = $controller('homeCtrl', {
       $scope: scope,
     });

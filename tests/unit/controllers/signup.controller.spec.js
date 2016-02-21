@@ -28,7 +28,8 @@ describe('Login controller', () => {
         else cbb(err);
       }
     },
-    Auth;
+    Auth,
+    httpBackend;
 
   beforeEach(() => {
     module('paperless');
@@ -36,6 +37,9 @@ describe('Login controller', () => {
 
   beforeEach(inject(($injector, $rootScope, $controller) => {
     scope = $rootScope.$new();
+    httpBackend = $injector.get('$httpBackend');
+    httpBackend.expectGET('views/home.html').respond(200);
+
     controller = $controller('signupCtrl', {
       $scope: scope,
       Users: Users
