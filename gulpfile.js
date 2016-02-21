@@ -41,6 +41,7 @@ var gulp = require('gulp'),
       'public/lib/ng-file-upload/ng-file-upload.min.js',
       'public/lib/ng-file-upload-shim/ng-file-upload-shim.min.js',
       'public/lib/ngprogress/build/ngprogress.min.js',
+      'public/lib/angular-endless-scroll/dist/angular-endless-scroll.min.js',
       'public/js/bundle.js',
       'tests/unit/**/*.spec.js'
     ],
