@@ -45,8 +45,8 @@ md-bottom-sheet(
           md-virtual-repeat-container#vertical-container(ng-init="loadRoles()")
             .repeated-item(md-virtual-repeat="role in roles")
               md-checkbox(
-                ng-checked="exists(role, selectedRoles)", 
-                ng-click="toggle(role, selectedRoles)")
+                ng-checked="exists(role.title, selectedRoles)", 
+                ng-click="toggle(role.title, selectedRoles)")
                 | {{role.title}}
 
               md-divider
