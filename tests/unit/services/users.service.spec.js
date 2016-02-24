@@ -280,38 +280,4 @@ describe('Users service',
           expect(featuredUsers).toBe(null);
         });
     });
-
-    describe('login test', function(){
-      beforeEach(function () {
-        var $window = {location: {reload: function(){}}};
-
-        module(function($provide) {
-          $provide.value('$window', $window);
-        });
-    });
-      describe('',
-      () => {
-        describe('fbLogin method',
-          () => {
-
-            beforeEach(() => {
-              httpBackend.flush();
-              Users.fbLogin();
-            });
-
-            it('should be called', () => {});
-          });
-
-        describe('gLogin method',
-          () => {
-
-            beforeEach(() => {
-              Users.gLogin();
-            });
-
-            it('should be called', () => {});
-          });
-      });
-
-    });
   });
