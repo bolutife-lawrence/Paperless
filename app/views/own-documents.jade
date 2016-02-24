@@ -1,4 +1,4 @@
-.docs-container.animated.slideInLeft(ng-init="init()")
+md-virtual-repeat-container.docs-container.animated.slideInLeft(ng-init="init()")
 
   div(ng-show="ownDocs.length < 1")
     div(
@@ -12,8 +12,8 @@
 
   .outter-doc-card(
     ng-if="ownDocs.length > 0",
-    endless-scroll="doc in ownDocs | filter: searchText:strict")
-
+    md-virtual-repeat="doc in ownDocs | filter: searchText:strict",
+    md-on-demand="")
     .inner-doc-card
       md-content.doc-card
         .content

@@ -2,7 +2,13 @@ describe('Parent documents controller', () => {
 
   var scope,
     controller,
-    Utils,
+    Utils = {
+      showBottomSheet: (_event, view) => {
+        if (_event) {
+          return view;
+        }
+      }
+    },
     sce,
     httpBackend;
 
@@ -20,4 +26,29 @@ describe('Parent documents controller', () => {
       Utils: Utils
     });
   }));
+
+  describe('Text hightlight',
+  () => {
+    it('should filter and highlight text',
+    () => {
+      var hayStack = 'TDD is beautiful',
+      needle = 'TDD',
+      result = scope.highlight(needle, hayStack);
+      expect(typeof result).toBe('object');
+    });
+
+    it('should return text untouched if text to search in is not present ',
+    () => {
+      var needle = 'TDD',
+      result = scope.highlight(needle, null);
+      expect(typeof result).toBe('object');
+    });
+
+    it('show load up mdBottomSheet',
+    () => {
+      spyOn(Utils, 'showBottomSheet').and.callThrough();
+      scope.loadCreateDocModal();
+      expect(Utils.showBottomSheet).toHaveBeenCalled();
+    });
+  });
 });

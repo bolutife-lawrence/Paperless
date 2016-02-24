@@ -147,7 +147,7 @@ gulp.task('test:e2e', (cb) => {
     .on('end', cb);
 });
 
-gulp.task('test:unit', ['browserify'], () => {
+gulp.task('test:unit', () => {
   // Be sure to return the stream
   return gulp.src(paths.unitTests)
     .pipe(karma({
