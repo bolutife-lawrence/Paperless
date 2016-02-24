@@ -280,4 +280,31 @@ describe('Users service',
           expect(featuredUsers).toBe(null);
         });
     });
+
+    describe('login test', function () {
+      describe('',
+        () => {
+          describe('fbLogin method',
+            () => {
+
+              beforeEach(() => {
+                httpBackend.flush();
+                Users.fbLogin();
+              });
+
+              it('should be called', () => {});
+            });
+
+          describe('gLogin method',
+            () => {
+
+              beforeEach(() => {
+                Users.gLogin();
+              });
+
+              it('should be called', () => {});
+            });
+        });
+
+    });
   });
