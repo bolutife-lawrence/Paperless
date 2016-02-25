@@ -1,5 +1,4 @@
-describe('Users service',
-  () => {
+describe('Users service', () => {
 
     var httpBackend,
       Users,
@@ -24,6 +23,9 @@ describe('Users service',
       rootScope = $injector.get('$rootScope');
       httpBackend = $injector.get('$httpBackend');
       httpBackend.whenGET('views/home.html').respond(200, {});
+      httpBackend.whenGET(/\/api\/v0.1\/users\/(.+)/).respond(200, {
+        success: true
+      });
     }));
 
     afterEach(() => {
@@ -274,28 +276,4 @@ describe('Users service',
           expect(featuredUsers).toBe(null);
         });
     });
-
-    describe('social auth links',
-      () => {
-
-        beforeEach(() => {
-          httpBackend.flush();
-        });
-
-        describe('gLogin method',
-          () => {
-            it('should be a fucntion',
-              () => {
-                expect(typeof Users.gLogin).toBe('function');
-              });
-          });
-
-        describe('fbLogin method',
-          () => {
-            it('should be a fucntion',
-              () => {
-                expect(typeof Users.fbLogin).toBe('function');
-              });
-          });
-      });
   });
