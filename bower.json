@@ -6,7 +6,7 @@
     "angular-animate": "latest",
     "angular-aria": "latest",
     "angular-material": "~0.11.0",
-    "angular-mocks": "~1.4.7",
+    "angular-mocks": "~1.4.x",
     "angular-resource": "~1.4.7",
     "angular-route": "~1.4.7",
     "angular-ui-router": "~0.2.15",
