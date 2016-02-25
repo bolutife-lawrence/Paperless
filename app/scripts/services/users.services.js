@@ -10,17 +10,22 @@ export default angular.module('paperless.services')
       $state,
       $window,
       Api) => {
-        
-      var obj = $resource(`${Api.address}users/:id`, {
-        id: '@id'
-      }, {
-        update: {
-          // this method issues a PUT request
-          method: 'PUT'
-        }
-      }, {
-        stripTrailingSlashes: false
-      });
+
+        var obj = $resource(`${Api.address}users/:id`, {
+          id: '@id'
+        }, {
+          update: {
+            // this method issues a PUT request
+            method: 'PUT'
+          }
+        }, {
+          stripTrailingSlashes: false
+        }, {
+          'query': {
+            method: 'GET',
+            isArray: false
+          }
+        });
 
       obj.login = (user, cb) => {
         $http.post(`${Api.address}auth/authenticate`, user)
@@ -39,6 +44,7 @@ export default angular.module('paperless.services')
             roles: roles.toString()
           }
         };
+
         $http.get(`${Api.address}users/featured`, params)
           .then((users) => {
             cb(null, users);

@@ -9,6 +9,7 @@ export default angular.module('paperless.controllers')
     'Utils',
     'Roles',
     'Users',
+    'Alert',
     'Documents', (
       $scope,
       $rootScope,
@@ -19,6 +20,7 @@ export default angular.module('paperless.controllers')
       Utils,
       Roles,
       Users,
+      Alert,
       Documents) => {
 
       $scope.init = () => {
@@ -39,7 +41,6 @@ export default angular.module('paperless.controllers')
         }];
 
         $scope.noFeaturedUsersMsg = 'None for now';
-        $scope.docOwner = '';
         $scope.getDoc();
       };
 
@@ -54,15 +55,15 @@ export default angular.module('paperless.controllers')
       };
 
       $scope.toggle = (item, list) => {
-        var index = list.indexOf(item.title);
+        var index = list.indexOf(item);
         if (index > -1) {
           list.splice(index, 1);
         } else {
-          list.push(item.title);
+          list.push(item);
         }
       };
 
-      $scope.exists = (item, list) => list.indexOf(item.title) > -1;
+      $scope.exists = (item, list) => list.indexOf(item) > -1;
 
       $scope.hasPrivilege = () => {
         return $rootScope.currentUser._id === $scope.viewDoc.userId[0]._id;
@@ -79,7 +80,7 @@ export default angular.module('paperless.controllers')
 
       $scope.getSelectedRoles = () => {
         $scope.selectedRoles = [];
-        if ($scope.viewDoc.length < 1) {
+        if ($scope.viewDoc.roles.length < 1) {
           return;
         }
 
@@ -112,7 +113,7 @@ export default angular.module('paperless.controllers')
       };
 
       $scope.deleteDoc = () => {
-        swal({
+        Alert.showWithConfirm({
           title: 'Are you sure?',
           text: 'You will not be able to recover this document!',
           type: 'warning',
@@ -123,9 +124,8 @@ export default angular.module('paperless.controllers')
         }, () => {
           Documents.delete({
             id: $stateParams.doc_id
-          }, res => {
-            if (res.success) {
-              swal({
+          }, () => {
+              Alert.show({
                 title: 'Deleted!',
                 text: 'Document has been deleted.',
                 type: 'success',
@@ -133,9 +133,8 @@ export default angular.module('paperless.controllers')
                 timer: 2000
               });
               $state.go('dashboard.user-documents.own');
-            }
           }, err => {
-            swal({
+            Alert.show({
               title: 'Document was not deleted!',
               text: err.data.message,
               type: 'error',
@@ -150,8 +149,8 @@ export default angular.module('paperless.controllers')
         let docDetails = angular.copy($scope.viewDoc);
         docDetails.roles = $scope.selectedRoles;
 
-        if (docDetails.roles < 1) {
-          swal({
+        if (docDetails.roles.length < 1) {
+          Alert.show({
             title: 'Sorry!',
             text: 'Select atleast a role',
             type: 'error',
@@ -163,24 +162,22 @@ export default angular.module('paperless.controllers')
 
         Documents.update({
           id: $stateParams.doc_id
-        }, docDetails, res => {
-          if (res.success) {
-            $state.go('dashboard.user-documents.own', {
-              id: $rootScope.currentUser._id
-            });
+        }, docDetails, () => {
+          $state.go('dashboard.user-documents.own', {
+            id: $rootScope.currentUser._id
+          });
 
-            $mdBottomSheet.hide();
+          $mdBottomSheet.hide();
 
-            swal({
-              title: 'updated!',
-              text: 'Document has been updated.',
-              type: 'success',
-              showConfirmButton: false,
-              timer: 2000
-            });
-          }
+          Alert.show({
+            title: 'updated!',
+            text: 'Document has been updated.',
+            type: 'success',
+            showConfirmButton: false,
+            timer: 2000
+          });
         }, err => {
-          swal({
+          Alert.show({
             title: 'Something went wrong!',
             text: err.data.message,
             type: 'error',
@@ -204,8 +201,8 @@ export default angular.module('paperless.controllers')
       $scope.createDoc = () => {
         $scope.newDoc.roles = $scope.selectedRoles;
 
-        if ($scope.selectedRoles < 1) {
-          swal({
+        if ($scope.selectedRoles.length < 1) {
+          Alert.show({
             title: 'Sorry!',
             text: 'Select atleast a role',
             type: 'error',
@@ -216,9 +213,13 @@ export default angular.module('paperless.controllers')
         }
 
         Documents.save($scope.newDoc, () => {
-          $state.reload();
+          $state.go('dashboard.user-documents.own', {
+            id: $rootScope.currentUser._id
+          });
+
           $mdBottomSheet.hide();
-          swal({
+
+          Alert.show({
             title: 'Created!',
             text: 'Document created.',
             type: 'success',
@@ -226,9 +227,9 @@ export default angular.module('paperless.controllers')
             timer: 2000
           });
         }, err => {
-          swal({
+          Alert.show({
             title: 'Oops.',
-            text: err.message,
+            text: err.data.message,
             type: 'error',
             showConfirmButton: false,
             timer: 2000

@@ -54,7 +54,7 @@ export default angular.module('paperless.controllers')
             $scope.progressBar.start();
             var progess = parseInt(100.0 * evt.loaded / evt.total);
             $scope.progressBar.set(progess);
-            
+
             if (progess === 100) {
               $scope.progressBar.complete();
             }
@@ -118,6 +118,7 @@ export default angular.module('paperless.controllers')
             token: res.token
           };
           $rootScope.currentUser = res.user;
+          $rootScope.$broadcast('currentUser:updated', res.user);
 
           swal({
             title: 'Updated!',

@@ -13,6 +13,10 @@
 
       $scope.init = () => {
 
+        $rootScope.$on('currentUser:updated', (event, currentUser) => {
+          $rootScope.currentUser = currentUser;
+        });
+
         $scope.menuItems = [];
 
         if ($rootScope.currentUser.role.length > 0) {

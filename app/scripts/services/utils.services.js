@@ -1,10 +1,5 @@
 export default angular.module('paperless.services')
-  .factory('Utils', [
-    '$mdToast',
-    '$mdBottomSheet', (
-      $mdToast,
-      $mdBottomSheet) => {
-        
+  .factory('Utils', ['$mdBottomSheet', ($mdBottomSheet) => {
       return {
         showBottomSheet: (event, template) => {
           $mdBottomSheet.show({

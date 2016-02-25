@@ -1,4 +1,4 @@
-.docs-container.animated.slideInRight(ng-init="init()")
+md-virtual-repeat-container.docs-container.animated.slideInRight(ng-init="init()")
 
   div(ng-show="featuredDocs.length < 1")
     div(
@@ -12,8 +12,8 @@
 
   .outter-doc-card(
     ng-if="featuredDocs.length > 0", 
-    endless-scroll="doc in featuredDocs | filter: searchText:strict")
-
+    md-virtual-repeat="doc in featuredDocs | filter: searchText:strict",
+    md-on-demand="")
     .inner-doc-card
       md-content.doc-card
         .content

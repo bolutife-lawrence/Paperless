@@ -42,6 +42,7 @@ var gulp = require('gulp'),
       'public/lib/ng-file-upload-shim/ng-file-upload-shim.min.js',
       'public/lib/ngprogress/build/ngprogress.min.js',
       'public/lib/angular-endless-scroll/dist/angular-endless-scroll.min.js',
+      'public/lib/moment/min/moment.min.js',
       'public/js/bundle.js',
       'tests/unit/**/*.spec.js'
     ],
@@ -147,7 +148,7 @@ gulp.task('test:e2e', (cb) => {
     .on('end', cb);
 });
 
-gulp.task('test:unit', ['browserify'], () => {
+gulp.task('test:unit', () => {
   // Be sure to return the stream
   return gulp.src(paths.unitTests)
     .pipe(karma({

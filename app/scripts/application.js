@@ -26,6 +26,7 @@
   require('./services/api.services');
   require('./services/avatar.services');
   require('./services/utils.services');
+  require('./services/alert.services');
 
   // Import filters
   require('./filters/date-time-parser.filters');
@@ -39,7 +40,6 @@
     'paperless.filters',
     'paperless.directives',
     'ui.router',
-    'dc.endlessScroll',
     'ngFileUpload',
     'ngProgress',
     'ngResource',
