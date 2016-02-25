@@ -24,6 +24,7 @@
     "moment" : true,
     "after" : true,
     "beforeEach" : true,
+    "afterEach" : true,
     "describe" : true,
     "expect" : true,
     "it" : true,
