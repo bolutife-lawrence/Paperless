@@ -36,7 +36,7 @@ export default angular.module('paperless.services')
             cb(null, res);
           })
           .catch((err) => {
-            console.log(err);
+            cb(err);
           });
       };
 
@@ -53,7 +53,7 @@ export default angular.module('paperless.services')
             cb(null, res);
           })
           .catch((err) => {
-            console.log(err);
+            cb(err);
           });
       };
 

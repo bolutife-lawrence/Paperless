@@ -24,8 +24,6 @@ describe('Users service',
       rootScope = $injector.get('$rootScope');
       httpBackend = $injector.get('$httpBackend');
       httpBackend.whenGET('views/home.html').respond(200, {});
-      httpBackend.whenGET(/\/api\/v0.1\/auth\/facebook/).respond(200, {});
-      httpBackend.whenGET(/\/api\/v0.1\/auth\/google/).respond(200, {});
     }));
 
     afterEach(() => {
@@ -211,7 +209,7 @@ describe('Users service',
               loggedIn: true
             });
 
-          successFn = (err, res) => rootScope.currentUser = res;
+          successFn = (err, res) => rootScope.currentUser = res.data;
 
           Users.login({
             email: 'lawrence@gmail.com',
@@ -226,9 +224,7 @@ describe('Users service',
       it('should fail on authentication',
         () => {
           httpBackend.expectPOST(/\/api\/v0.1\/auth\/authenticate/)
-            .respond(500, {
-              loggedIn: false
-            });
+            .respond(500, null);
 
           errorFn = () => rootScope.currentUser = null;
 
@@ -251,7 +247,7 @@ describe('Users service',
               users: returnedUsers
             });
 
-          successFn = (err, res) => featuredUsers = res;
+          successFn = (err, res) => featuredUsers = res.data;
 
           Users.featuredUsers({
             roles: roleIds
@@ -265,9 +261,7 @@ describe('Users service',
       it('should fail on authentication',
         () => {
           httpBackend.expectGET(/\/api\/v0.1\/users\/featured\?(.+)/)
-            .respond(500, {
-              users: null
-            });
+            .respond(500, null);
 
           errorFn = () => featuredUsers = null;
 
@@ -281,30 +275,27 @@ describe('Users service',
         });
     });
 
-    describe('login test', function () {
-      describe('',
-        () => {
-          describe('fbLogin method',
-            () => {
+    describe('social auth links',
+      () => {
 
-              beforeEach(() => {
-                httpBackend.flush();
-                Users.fbLogin();
-              });
-
-              it('should be called', () => {});
-            });
-
-          describe('gLogin method',
-            () => {
-
-              beforeEach(() => {
-                Users.gLogin();
-              });
-
-              it('should be called', () => {});
-            });
+        beforeEach(() => {
+          httpBackend.flush();
         });
 
-    });
+        describe('gLogin method',
+          () => {
+            it('should be a fucntion',
+              () => {
+                expect(typeof Users.gLogin).toBe('function');
+              });
+          });
+
+        describe('fbLogin method',
+          () => {
+            it('should be a fucntion',
+              () => {
+                expect(typeof Users.fbLogin).toBe('function');
+              });
+          });
+      });
   });
