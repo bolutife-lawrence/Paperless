@@ -1,8 +1,8 @@
-md-virtual-repeat-container.docs-container.animated.slideInLeft(ng-init="init()")
+.docs-container.animated.slideInLeft(ng-init="init()")
 
   div(ng-show="ownDocs.length < 1")
     div(
-      layout="row", 
+      layout="row",
       layout-align="center center")
 
       .no-docs-msg-container
@@ -12,20 +12,19 @@ md-virtual-repeat-container.docs-container.animated.slideInLeft(ng-init="init()"
 
   .outter-doc-card(
     ng-if="ownDocs.length > 0",
-    md-virtual-repeat="doc in ownDocs | filter: searchText:strict",
-    md-on-demand="")
+    ng-repeat="doc in ownDocs | filter: searchText:strict")
     .inner-doc-card
       md-content.doc-card
         .content
           h5(ng-bind-html="highlight(doc.title, searchText.title)")
           md-divider
-          p.small-text {{doc.content}} 
+          p.small-text {{doc.content}}
         .indicator
           i.fa.fa-user
 
         md-button.md-ink-ripple.md-raised.doc-card-button(
-          ui-sref="dashboard.view-document({doc_id: \"{{doc._id}}\"})", 
-          md-ink-ripple, 
+          ui-sref="dashboard.view-document({doc_id: \"{{doc._id}}\"})",
+          md-ink-ripple,
           aria-label="View document")
           i.fa.fa-eye
 

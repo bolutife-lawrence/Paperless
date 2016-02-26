@@ -1,4 +1,4 @@
-md-virtual-repeat-container.docs-container.animated.slideInRight(ng-init="init()")
+.docs-container.animated.slideInRight(ng-init="init()")
 
   div(ng-show="featuredDocs.length < 1")
     div(
@@ -11,9 +11,8 @@ md-virtual-repeat-container.docs-container.animated.slideInRight(ng-init="init()
         span {{noDocsMsg}}
 
   .outter-doc-card(
-    ng-if="featuredDocs.length > 0", 
-    md-virtual-repeat="doc in featuredDocs | filter: searchText:strict",
-    md-on-demand="")
+    ng-if="featuredDocs.length > 0",
+    ng-repeat="doc in featuredDocs | filter: searchText:strict")
     .inner-doc-card
       md-content.doc-card
         .content
@@ -24,8 +23,8 @@ md-virtual-repeat-container.docs-container.animated.slideInRight(ng-init="init()
           i.fa.fa-users
 
         md-button.md-ink-ripple.md-raised.doc-card-button(
-          ui-sref="dashboard.view-document({doc_id: \"{{doc._id}}\"})", 
-          md-ink-ripple, 
+          ui-sref="dashboard.view-document({doc_id: \"{{doc._id}}\"})",
+          md-ink-ripple,
           aria-label="View document")
           i.fa.fa-eye
 

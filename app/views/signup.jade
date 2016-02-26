@@ -1,5 +1,5 @@
 md-content.login-signup-box(
-  layout="column", 
+  layout="column",
   layout-align="center center",
   layout-md="column",
   layout-sm="column",
@@ -12,35 +12,35 @@ md-content.login-signup-box(
       span.form-header-text Paperless
 
   md-content.login-signup-body(
-    layout="column", 
-    flex="100", 
+    layout="column",
+    flex="100",
     layout-padding)
 
     form(
-      method="post", 
-      name="signupForm", 
+      method="post",
+      name="signupForm",
       ng-submit="signup()")
 
       md-input-container.md-block
         md-icon
           i.fa.fa-envelope
         input(
-          ng-model="user.email", 
-          name="email", 
-          type="email", 
-          ng-required="true", 
-          placeholder="Email", 
+          ng-model="user.email",
+          name="email",
+          type="email",
+          ng-required="true",
+          placeholder="Email",
           aria-label="user.email")
 
       md-input-container.md-block
         md-icon
           i.fa.fa-key
         input(
-          ng-model="user.password", 
+          ng-model="user.password",
           name="password",
-          type="password", 
+          type="password",
           ng-required="true",
-          ng-minlength="8", 
+          ng-minlength="8",
           ng-maxlength="20",
           ng-pattern="/(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z])/",
           placeholder="Password",
@@ -50,18 +50,17 @@ md-content.login-signup-box(
         md-icon
           i.fa.fa-key
         input(
-          ng-model="user.cpassword", 
+          ng-model="user.cpassword",
           name="cpassword"
-          type="password", 
-          ng-required="true", 
-          placeholder="Confirm password", 
-          aria-label="User password",
-          pw-check="user.password")
+          type="password",
+          ng-required="true",
+          placeholder="Confirm password",
+          aria-label="User password")
 
       br
 
       md-button.md-raised.login-signup-button(
-        type="submit", 
+        type="submit",
         ng-disabled="!signupForm.$valid")
         i.fa.fa-user-plus
         span.login-signup-text &nbsp; SIGNUP
@@ -76,7 +75,7 @@ md-content.login-signup-box(
     p.animated.zoomIn(ng-show="signupForm.email.$error.required && signupForm.email.$dirty") Email is required
     p.animated.zoomIn(ng-show="!signupForm.email.$error.required && signupForm.email.$error.email && signupForm.email.$dirty") Invalid email
     p.animated.zoomIn(ng-show="signupForm.password.$error.required && signupForm.password.$dirty") Password is required
-    p.animated.zoomIn(ng-show="!signupForm.password.$error.required && (signupForm.password.$error.minlength || signupForm.password.$error.maxlength) && signupForm.password.$dirty") 
+    p.animated.zoomIn(ng-show="!signupForm.password.$error.required && (signupForm.password.$error.minlength || signupForm.password.$error.maxlength) && signupForm.password.$dirty")
       | Passwords must be between 8 and 20 characters.
     p.animated.zoomIn(ng-show="!signupForm.password.$error.required && !signupForm.password.$error.minlength && !signupForm.password.$error.maxlength && signupForm.password.$error.pattern && signupForm.password.$dirty")
       | Password must contain atleast one lowercase and uppercase letter, and one non-alpha character (a number or a symbol.)
