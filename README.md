@@ -1,7 +1,7 @@
 # Paperless
 
-[![Coverage Status](https://coveralls.io/repos/github/andela-blawrence/Paperless/badge.svg?branch=dev)](https://coveralls.io/github/andela-blawrence/Paperless?branch=dev)
-[![Build Status](https://travis-ci.org/andela-blawrence/Paperless.svg?branch=chore/unitTests)](https://travis-ci.org/andela-blawrence/Paperless)
+[![Coverage Status](https://coveralls.io/repos/github/andela-blawrence/Paperless/badge.svg?branch=master)](https://coveralls.io/github/andela-blawrence/Paperless?branch=master)
+[![Build Status](https://travis-ci.org/andela-blawrence/dms-api.svg?branch=master)](https://travis-ci.org/andela-blawrence/dms-api)
 [![CodeClimate](https://codeclimate.com/github/andela-blawrence/Paperless/badges/gpa.svg)](https://codeclimate.com/github/andela-blawrence/Paperless)
 [![Issue Count](https://codeclimate.com/github/andela-blawrence/Paperless/badges/issue_count.svg)](https://codeclimate.com/github/andela-blawrence/Paperless)
 
