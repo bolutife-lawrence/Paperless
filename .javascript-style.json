@@ -13,7 +13,7 @@
   "noempty": true,
   "nonew": true,
   "esnext": true,
-  "globals": {
+  "predef": {
     "$" : true,
     "$scope": true,
     "_": true,
