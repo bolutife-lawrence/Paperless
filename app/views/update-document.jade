@@ -1,0 +1,52 @@
+md-bottom-sheet(
+  ng-controller="docCtrl", 
+  ng-init="getDoc()")
+
+  div(
+    layout="column", 
+    layout-align="center center")
+    span.small-text.white-color press "ESC" to exit this view.
+    .create-doc-form
+      h5.headline.white-color
+        i.fa.fa-file.fa-2x &nbsp; Update Document
+
+      md-divider
+
+      br
+
+      div(
+        layout="row",
+        layout-align="start start")
+
+        div(flex=70)
+          md-input-container.md-block
+            label Title
+            input(
+              ng-model="viewDoc.title",
+              type="text", 
+              ng-required="true", 
+              aria-label="doc.title")
+
+          md-input-container.md-block
+            label Content
+            textarea(
+              ng-model="viewDoc.content",
+              columns="10", 
+              md-maxlength="1000" rows="14")
+
+        div(layout="column" flex=30)
+          span.small-text.white-color.text-center Roles assigned
+
+          br
+
+          md-virtual-repeat-container#vertical-container(ng-init="loadRoles()")
+            .repeated-item(md-virtual-repeat="role in roles")
+              md-checkbox(
+                ng-checked="exists(role.title, selectedRoles)", 
+                ng-click="toggle(role.title, selectedRoles)")
+                | {{role.title}}
+
+              md-divider
+
+      md-button.md-raised.custom-button(ng-click="updateDoc()")
+        span.login-signup-text SAVE CHANGES

@@ -1,0 +1,79 @@
+.view-doc(ng-init="init()")
+
+  .view-doc-header
+
+    h3
+      i.fa.fa-arrow-circle-o-left.back-icon(ui-sref="dashboard.user-documents.own")
+      span {{viewDoc.title}}
+
+    md-fab-speed-dial.md-scale.md-fab-top-right(
+      ng-if="hasPrivilege()", 
+      ng-hide="hidden", 
+      md-direction="left", 
+      md-open="isOpen", 
+      ng-class="{ \"md-hover-full\": hover }", 
+      ng-mouseenter="isOpen=true", 
+      ng-mouseleave="isOpen=false")
+
+      md-fab-trigger
+        md-button.md-fab.md-raised.md-mini.doc-menu(aria-label="Document options")
+          md-tooltip(
+            md-direction="top", 
+            md-visible="tooltipVisible") Options
+          md-icon
+            i.fa.fa-ellipsis-v
+
+      md-fab-actions
+        div(ng-repeat="item in menuItems")
+          md-button.md-fab.md-raised.md-mini.doc-menu-options(
+            aria-label="{{item.name}}", 
+            ng-click="callFunction(item.action)")
+            md-tooltip(
+              md-direction="{{item.direction}}", 
+              md-visible="tooltipVisible", 
+              md-autohide="false")
+              | {{item.name}}
+            md-icon(aria-label="{{item.name}}")
+              i(class="{{item.icon}}")
+
+    md-divider
+
+  div(layout="row")
+    div(flex="60")
+      .doc-content
+        span {{viewDoc.content}}
+      md-divider
+      .doc-owner
+        span.small-text
+          em created by 
+          span {{docOwner}}
+      .doc-stats
+        span.small-text 
+          em created 
+          span {{viewDoc.createdAt | momentFromNow}} &nbsp;
+        span.small-text
+          em modified 
+          span {{viewDoc.updatedAt | momentFromNow}}
+
+      div    
+        ul.tags
+          li(ng-repeat="role in viewDoc.roles")
+            span.tag.small-text {{role.title}}
+
+    .featured-users-section(flex="30")
+      h3.featured-users-title People who can see this document
+
+      md-virtual-repeat-container
+
+        .no-docs-msg-container(ng-if="featuredUsers.length < 1")
+          .icon-holder
+            i.fa.fa-meh-o.fa-5x
+          span {{noFeaturedUsersMsg}}
+
+        div(md-virtual-repeat="user in featuredUsers")
+          .featured-user
+            img.thumb(ng-src="{{user.img_url}}")
+            .user-info
+              span.small-text(ng-if="user.name") {{user.name.last + " " + user.name.first}}
+              br
+              span.small-text(ng-if="user.email") {{user.email}}

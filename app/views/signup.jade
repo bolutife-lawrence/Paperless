@@ -1,0 +1,84 @@
+md-content.login-signup-box(
+  layout="column", 
+  layout-align="center center",
+  layout-md="column",
+  layout-sm="column",
+  layout-xs="column",
+  flex="100",
+  class="animated fadeInUp")
+
+  span.text-center.header
+    i.fa.fa-file.fa-2x.white-color &nbsp;
+      span.form-header-text Paperless
+
+  md-content.login-signup-body(
+    layout="column", 
+    flex="100", 
+    layout-padding)
+
+    form(
+      method="post", 
+      name="signupForm", 
+      ng-submit="signup()")
+
+      md-input-container.md-block
+        md-icon
+          i.fa.fa-envelope
+        input(
+          ng-model="user.email", 
+          name="email", 
+          type="email", 
+          ng-required="true", 
+          placeholder="Email", 
+          aria-label="user.email")
+
+      md-input-container.md-block
+        md-icon
+          i.fa.fa-key
+        input(
+          ng-model="user.password", 
+          name="password",
+          type="password", 
+          ng-required="true",
+          ng-minlength="8", 
+          ng-maxlength="20",
+          ng-pattern="/(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z])/",
+          placeholder="Password",
+          aria-label="user.password")
+
+      md-input-container.md-block
+        md-icon
+          i.fa.fa-key
+        input(
+          ng-model="user.cpassword", 
+          name="cpassword"
+          type="password", 
+          ng-required="true", 
+          placeholder="Confirm password", 
+          aria-label="User password",
+          pw-check="user.password")
+
+      br
+
+      md-button.md-raised.login-signup-button(
+        type="submit", 
+        ng-disabled="!signupForm.$valid")
+        i.fa.fa-user-plus
+        span.login-signup-text &nbsp; SIGNUP
+
+      br
+
+  span.form-footer-text.text-center Already have an account?
+    a(ui-sref="welcome.login") &nbsp;&nbsp;
+      span.emphasize LOGIN
+
+  .error-messages.small-text.white-color.text-center
+    p.animated.zoomIn(ng-show="signupForm.email.$error.required && signupForm.email.$dirty") Email is required
+    p.animated.zoomIn(ng-show="!signupForm.email.$error.required && signupForm.email.$error.email && signupForm.email.$dirty") Invalid email
+    p.animated.zoomIn(ng-show="signupForm.password.$error.required && signupForm.password.$dirty") Password is required
+    p.animated.zoomIn(ng-show="!signupForm.password.$error.required && (signupForm.password.$error.minlength || signupForm.password.$error.maxlength) && signupForm.password.$dirty") 
+      | Passwords must be between 8 and 20 characters.
+    p.animated.zoomIn(ng-show="!signupForm.password.$error.required && !signupForm.password.$error.minlength && !signupForm.password.$error.maxlength && signupForm.password.$error.pattern && signupForm.password.$dirty")
+      | Password must contain atleast one lowercase and uppercase letter, and one non-alpha character (a number or a symbol.)
+    p.animated.zoomIn(ng-show="signupForm.cpassword.$error.required && signupForm.cpassword.$dirty") Please confirm your password.
+    p.animated.zoomIn(ng-show="!signupForm.cpassword.$error.required && signupForm.cpassword.$error.noMatch && signupForm.password.$dirty") Passwords do not match.

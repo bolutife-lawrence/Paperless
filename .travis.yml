@@ -1,0 +1,38 @@
+language: node_js
+node_js:
+  - "5.0"
+env:
+  - CXX=g++-4.8
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-4.8
+before_install:
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+install:
+  - npm install
+  - npm install -g gulp
+  - npm install -g bower
+  - bower install
+  - gulp build
+script:
+  - npm test
+after_success:
+  - npm run coveralls
+sudo: false
+notifications:
+  slack: andela:ZRneYjZ1J3TQOlIAKxoGaDnr
+deploy:
+  provider: heroku
+  api_key:
+    secure: 4BxlEyE9muvbq7zCScOXCaZDUDhBMfUQpxOr1Au+R3KxbqJATJS1ZNjQ13u+Bbj8e88zYhd4nWXltw2cdhBfj8WcOk/8Whn3qrMIQ5vdjhuxJWLefaRrCjfSneab4CT4mWOo+fcuhmBBN0G63KUyy0wXF+vgztsNYc1r+/W6Q1UUDzLGzsrCypZ5LgzTs4xPkhwc6JeX2kR2+vWktoOIKh5Od3ZKM0tdonUJv6c9TB1a5eUuh88QiBXxGeAPFtl+rtTQTCyAb0r54kXLYE5eU17OlcQWbQxjw30ECkO9v6hcv/I8Rl5oMzPGW+DS1G6HLsjbYnKjDWcbCF/W4daFR2l2ld/mDIOlcRjo2SWsbv8hu4q9tET8Y5sxpFbISyaXcQlwhGuFu4xINJlFqQaXki2mZgQpIRc1MMxyBIvUwpFD9PegViT+irUApaF4baAWtmfRPRlIbvSlBhld4LvguBZwHa8l1rY3N0HO0aP+06Gq+3Sh82pjRHOOhGEGGuHz1fVcQ2rtEfZrUDf4JEc7iN67HzUJ0A3rAwa46NZWv/LLzVTrqxtyZXooV2RXsp6lomfS8aU8akmToI2hs3RbQY795iNkqxdlvThVhkfIo+jojPwtSyhrW8XITNJdC3KJdMRdc/Ia/AuXZK0n7LiliSBmFDEd8n+3f9RZz/uQDK8=
+  app: paperlesss
+  on:
+    repo: andela-blawrence/Paperless
+    branch: master
+after_deploy:
+  - gulp heroku
+  - "heroku ps:scale web=1 --app paperlesss"
