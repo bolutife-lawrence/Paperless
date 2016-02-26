@@ -1,1 +1,1 @@
-web: node server.js -log-file-
+web: npm run launch -log-file-
