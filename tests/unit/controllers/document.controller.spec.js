@@ -383,37 +383,6 @@ describe('Document controller', () => {
         });
     });
 
-  describe('deleteDoc function',
-    () => {
-
-      beforeEach(() => {
-        stateParams.doc_id = '56bf95c3d1716d4d941356hj';
-      });
-
-      it('should trigger the delete method in the Documents service',
-        () => {
-          spyOn(Documents, 'delete').and.callThrough();
-          spyOn(state, 'go').and.callThrough();
-          spyOn(Alert, 'showWithConfirm').and.callThrough();
-          scope.deleteDoc();
-          expect(Documents.delete).toHaveBeenCalled();
-          expect(Alert.showWithConfirm).toHaveBeenCalled();
-          expect(state.go).toHaveBeenCalled();
-        });
-
-      it('should trigger the show function in the Alert service',
-        () => {
-          stateParams.doc_id = null;
-          spyOn(Documents, 'delete').and.callThrough();
-          spyOn(state, 'go');
-          spyOn(Alert, 'show').and.callThrough();
-          scope.deleteDoc();
-          expect(Documents.delete).toHaveBeenCalled();
-          expect(state.go).not.toHaveBeenCalled();
-          expect(Alert.show).toHaveBeenCalled();
-        });
-    });
-
   describe('hasPrivilege function',
     () => {
 

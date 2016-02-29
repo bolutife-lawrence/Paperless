@@ -113,7 +113,7 @@ export default angular.module('paperless.controllers')
       };
 
       $scope.deleteDoc = () => {
-        Alert.showWithConfirm({
+        swal({
           title: 'Are you sure?',
           text: 'You will not be able to recover this document!',
           type: 'warning',
@@ -125,14 +125,15 @@ export default angular.module('paperless.controllers')
           Documents.delete({
             id: $stateParams.doc_id
           }, () => {
-              Alert.show({
-                title: 'Deleted!',
-                text: 'Document has been deleted.',
-                type: 'success',
-                showConfirmButton: false,
-                timer: 2000
-              });
-              $state.go('dashboard.user-documents.own');
+            Alert.show({
+              title: 'Deleted!',
+              text: 'Document has been deleted.',
+              type: 'success',
+              showConfirmButton: false,
+              timer: 2000
+            });
+
+            $state.go('dashboard.user-documents.own');
           }, err => {
             Alert.show({
               title: 'Document was not deleted!',
@@ -213,10 +214,9 @@ export default angular.module('paperless.controllers')
         }
 
         Documents.save($scope.newDoc, () => {
-          $state.go('dashboard.user-documents.own', {
-            id: $rootScope.currentUser._id
+          $state.go('dashboard.user-documents.own', {}, {
+            reload:true
           });
-
           $mdBottomSheet.hide();
 
           Alert.show({
