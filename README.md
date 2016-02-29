@@ -53,10 +53,6 @@ After installation, run the ``` npm test ``` command to run all tests.
 
 From the terminal, run ``` gulp ``` in the project directory.
 
-- **Test frameworks** - Karma and jasmine
-- **Assertion library** - jasmine
-- **Test coverage tool/service** - Coveralls
-
 ## Contributors
 
 1. Fork it!
