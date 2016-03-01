@@ -147,7 +147,7 @@
         ng-disabled="!updateUserForm.$valid")
         span.login-signup-text &nbsp; Save changes
 
-.error-messages.small-text.text-center.error-message-color
+.error-messages.small-text.text-center.error-message-color(ng-if="updateUserForm.firstname.$dirty && !updateUserForm.$valid")
   p.animated.zoomIn(ng-show="updateUserForm.lastname.$error.required && updateUserForm.lastname.$dirty") Lastname is required
   p.animated.zoomIn(ng-show="!updateUserForm.lastname.$error.required && (updateUserForm.lastname.$error.minlength || updateUserForm.lastname.$error.maxlength) && updateUserForm.lastname.$dirty")
     | Lastname must be between 2 and 50 characters.
