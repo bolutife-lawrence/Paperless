@@ -1,9 +1,9 @@
 md-content.login-signup-box(
-  layout="column", 
-  layout-align="center center", 
+  layout="column",
+  layout-align="center center",
   layout-md="column",
   layout-sm="column",
-  layout-xs="column", 
+  layout-xs="column",
   flex="100",
   class="animated fadeInUp")
 
@@ -12,40 +12,40 @@ md-content.login-signup-box(
       span.form-header-text Paperless
 
   md-content.login-signup-body(
-    layout="column", 
-    layout-padding, 
+    layout="column",
+    layout-padding,
     flex=60)
 
     form(
-      method="post", 
-      ng-submit="login()", 
+      method="post",
+      ng-submit="login()",
       name="loginForm")
 
       md-input-container.md-block
         md-icon
           i.fa.fa-user
         input(
-          ng-model="user.email", 
-          name="email", type="email", 
-          ng-required="true", 
-          placeholder="Email", 
+          ng-model="user.email",
+          name="email", type="email",
+          ng-required="true",
+          placeholder="Email",
           aria-label="user.login")
 
       md-input-container.md-block
         md-icon
           i.fa.fa-key
         input(
-          ng-model="user.password", 
-          name="password", 
-          type="password", 
-          ng-required="true", 
-          placeholder="Password", 
+          ng-model="user.password",
+          name="password",
+          type="password",
+          ng-required="true",
+          placeholder="Password",
           aria-label="user.password")
 
       br
 
       md-button.md-raised.login-signup-button(
-        type="submit", 
+        type="submit",
         ng-disabled="!loginForm.$valid")
         i.fa.fa-sign-in
         span.login-signup-text &nbsp; LOGIN
@@ -57,7 +57,7 @@ md-content.login-signup-box(
         span.line
 
     md-content.social-auth-buttons(
-      layout="row", 
+      layout="row",
       layout-align="center center",
       layout-sm="column")
 
@@ -71,7 +71,7 @@ md-content.login-signup-box(
     a(ui-sref="welcome.signup") &nbsp;&nbsp;
       span.emphasize SIGNUP
 
-  .error-messages.small-text.white-color.text-center
+  .error-messages.small-text.text-center(ng-if="loginForm.email.$dirty && !loginForm.$valid")
     p.animated.zoomIn(ng-show="loginForm.email.$error.required && loginForm.email.$dirty") Email is required
     p.animated.zoomIn(ng-show="!loginForm.email.$error.required && loginForm.email.$error.email && loginForm.email.$dirty") Invalid email
     p.animated.zoomIn(ng-show="loginForm.password.$error.required && loginForm.password.$dirty") Password is required

@@ -71,7 +71,7 @@ md-content.login-signup-box(
     a(ui-sref="welcome.login") &nbsp;&nbsp;
       span.emphasize LOGIN
 
-  .error-messages.small-text.white-color.text-center
+  .error-messages.small-text.text-center(ng-if="signupForm.email.$dirty && !signupForm.$valid")
     p.animated.zoomIn(ng-show="signupForm.email.$error.required && signupForm.email.$dirty") Email is required
     p.animated.zoomIn(ng-show="!signupForm.email.$error.required && signupForm.email.$error.email && signupForm.email.$dirty") Invalid email
     p.animated.zoomIn(ng-show="signupForm.password.$error.required && signupForm.password.$dirty") Password is required
