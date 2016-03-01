@@ -13,7 +13,6 @@ describe('Parent documents controller', () => {
     httpBackend;
 
   beforeEach(module('paperless'));
-
   beforeEach(inject(function ($injector, $controller) {
     scope = $injector.get('$rootScope');
     sce = $injector.get('$sce');

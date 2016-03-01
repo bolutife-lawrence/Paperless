@@ -20,7 +20,6 @@ describe('Alert service',
       };
 
     beforeEach(module('paperless'));
-
     beforeEach(inject(function ($injector) {
       Alert = $injector.get('Alert');
     }));
@@ -28,18 +27,18 @@ describe('Alert service',
     describe('show method',
       () => {
         it('should be called', () => {
-          spyOn(Alert, 'show').and.callThrough();
+          spyOn(window, 'swal').and.callThrough();
           Alert.show(config);
-          expect(Alert.show).toHaveBeenCalledWith(config);
+          expect(window.swal).toHaveBeenCalledWith(config);
         });
       });
 
-      describe('showWithConfirm method',
-        () => {
-          it('should be called', () => {
-            spyOn(Alert, 'showWithConfirm').and.callThrough();
-            Alert.showWithConfirm(_config);
-            expect(Alert.showWithConfirm).toHaveBeenCalledWith(_config);
-          });
+    describe('showWithConfirm method',
+      () => {
+        it('should be called', () => {
+          spyOn(window, 'swal').and.callThrough();
+          Alert.showWithConfirm(_config);
+          expect(window.swal).toHaveBeenCalledWith(_config);
         });
+      });
   });

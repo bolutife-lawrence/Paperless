@@ -11,7 +11,25 @@ describe('Dashboard controller', () => {
     },
     Auth,
     mdSidenav,
-    httpBackend;
+    httpBackend,
+    genMenuItems = [{
+      link: 'dashboard.user-documents.own',
+      title: 'Documents',
+      icon: 'fa fa-th-list'
+    }, {
+      link: 'dashboard.user-profile',
+      title: 'Profile',
+      icon: 'fa fa-user'
+    }],
+    adminMenuItems = [{
+      link: 'dashboard.users',
+      title: 'Users',
+      icon: 'fa fa-th-list'
+    }, {
+      link: 'dashboard.roles',
+      title: 'Roles',
+      icon: 'fa fa-th-list'
+    }];
 
   beforeEach(module('paperless'));
 
@@ -37,7 +55,6 @@ describe('Dashboard controller', () => {
 
     Auth = $injector.get('Auth');
     state = $injector.get('$state');
-
     scope.currentUser = currentUser;
   }));
 
@@ -46,7 +63,7 @@ describe('Dashboard controller', () => {
       scope.init();
       expect(scope.currentUser).toBeDefined();
       expect(scope.menuItems).toBeDefined();
-      expect(scope.menuItems).toEqual(jasmine.any(Array));
+      expect(scope.menuItems).toContain(...genMenuItems);
     });
 
   it('should populate menubar with menu items for admin users',
@@ -55,18 +72,17 @@ describe('Dashboard controller', () => {
       scope.init();
       expect(scope.currentUser).toBeDefined();
       expect(scope.menuItems).toBeDefined();
-      expect(scope.menuItems).toEqual(jasmine.any(Array));
+      expect(scope.menuItems).toContain(...adminMenuItems);
     });
 
   it('should pop up a directive pointing the user to select a role',
     () => {
-      spyOn(state, 'go');
+      spyOn(window, 'swal').and.callThrough();
       scope.currentUser.role = [];
       scope.init();
       expect(scope.currentUser).toBeDefined();
       expect(scope.currentUser.role.length).toBe(0);
-      state.go.call();
-      expect(state.go).toHaveBeenCalled();
+      expect(window.swal).toHaveBeenCalled();
     });
 
   it('should call toggle method of sidenav',

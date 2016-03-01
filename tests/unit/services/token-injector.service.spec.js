@@ -15,7 +15,6 @@ describe('Token injector', () => {
     };
 
   beforeEach(module('paperless'));
-
   beforeEach(module(function ($provide) {
     $provide.factory('Token', () => {
       return factoryObj;

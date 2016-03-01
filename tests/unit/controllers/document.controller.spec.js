@@ -442,17 +442,17 @@ describe('Document controller', () => {
       it('should remove an item from a list if the item exists already',
         () => {
           item = '4';
-          expect(list.length).toBe(5);
+          expect(list).toContain(item);
           scope.toggle(item, list);
-          expect(list.length).toBe(4);
+          expect(list).not.toContain(item);
         });
 
       it('should insert an item into a list if the item doesn\'t exist',
         () => {
           item = '6';
-          expect(list.length).toBe(5);
+          expect(list).not.toContain(item);
           scope.toggle(item, list);
-          expect(list.length).toBe(6);
+          expect(list).toContain(item);
         });
     });
 

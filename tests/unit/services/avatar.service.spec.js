@@ -15,7 +15,6 @@ describe('Avatar service', () => {
     imgId = 'jefheji894';
 
   beforeEach(module('paperless'));
-
   beforeEach(module(function ($provide) {
     $provide.factory('Upload', () => {
       return Upload;
@@ -37,21 +36,18 @@ describe('Avatar service', () => {
     it('should call the upload method of the Upload service', () => {
       spyOn(Upload, 'upload').and.callThrough();
       Avatar.uploadImage(file);
-
       httpBackend.flush();
-
       expect(Upload.upload).toHaveBeenCalled();
     });
   });
 
   describe('uploadImage method', () => {
-    it('should delete make a delete request', () => {
+    it('should make a delete request', () => {
       httpBackend.expectDELETE(/\/api\/v0.1\/images\/(.+)/).respond(200, {
         delete: true
       });
 
       Avatar.removeImage(imgId);
-
       httpBackend.flush();
     });
   });

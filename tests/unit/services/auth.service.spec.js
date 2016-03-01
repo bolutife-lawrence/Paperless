@@ -35,10 +35,8 @@ describe('Auth Service', () => {
   });
 
   it('setToken should call Token.set', () => {
-    spyOn(Auth, 'setToken').and.callThrough();
     spyOn(Token, 'set');
     Auth.setToken('token');
-    expect(Auth.setToken).toHaveBeenCalledWith('token');
     expect(Token.set).toHaveBeenCalled();
   });
 
@@ -48,11 +46,9 @@ describe('Auth Service', () => {
   });
 
   it('isLoggedIn should call Token.get and return true', () => {
-    spyOn(Auth, 'isLoggedIn').and.callThrough();
     spyOn(Token, 'get').and.callThrough();
     Auth.setToken('token');
     expect(Auth.isLoggedIn()).toBe(true);
-    expect(Auth.isLoggedIn).toHaveBeenCalled();
     expect(Token.get).toHaveBeenCalled();
   });
 
@@ -62,10 +58,8 @@ describe('Auth Service', () => {
   });
 
   it('logout should call Token.remove', () => {
-    spyOn(Auth, 'logout').and.callThrough();
     spyOn(Token, 'remove');
     Auth.logout();
-    expect(Auth.logout).toHaveBeenCalled();
     expect(Token.remove).toHaveBeenCalled();
   });
 });

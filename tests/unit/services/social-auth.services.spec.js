@@ -30,12 +30,17 @@ describe('Social auth', () => {
     });
   }));
 
+  beforeEach(() => {
+    $window.location.href = null;
+  });
+
   describe('gLogin method', () => {
     it('should be a fucntion', () => {
       expect(typeof Users.gLogin).toBe('function');
     });
 
     it('should set a url to $window.location.href', () => {
+      expect($window.location.href).toBe(null);
       Users.gLogin();
       expect($window.location.href).toBeDefined();
       expect(typeof $window.location.href).toBe('string');
@@ -48,6 +53,7 @@ describe('Social auth', () => {
     });
 
     it('should set a url to $window.location.href', () => {
+      expect($window.location.href).toBe(null);
       Users.fbLogin();
       expect($window.location.href).toBeDefined();
       expect(typeof $window.location.href).toBe('string');
