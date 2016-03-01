@@ -3,18 +3,16 @@ var gulp = require('gulp'),
   jade = require('gulp-jade'),
   bower = require('gulp-bower'),
   gutil = require('gulp-util'),
-  // concat = require('gulp-concat'),
   chmod = require('gulp-chmod'),
   minify = require('gulp-minify'),
   babelify = require('babelify'),
-  notify = require('gulp-notify'),
-  livereload = require('gulp-livereload'),
+  browserSync = require('browser-sync'),
+  // historyApiFallback = require('connect-history-api-fallback'),
   jshint = require('jshint'),
   browserify = require('browserify'),
   path = require('path'),
   source = require('vinyl-source-stream'),
   imagemin = require('gulp-imagemin'),
-  nodemon = require('gulp-nodemon'),
   karma = require('gulp-karma'),
   protractor = require('gulp-protractor').protractor,
   paths = {
@@ -49,6 +47,17 @@ var gulp = require('gulp'),
     libTests: ['lib/tests/**/*.js'],
     styles: 'app/styles/*.+(less|css)'
   };
+
+  gulp.task('serve',
+    ['less', 'jade', 'images', 'minifyJs', 'static-files'], () => {
+    browserSync({
+      server: {
+        baseDir: './public'
+        // middleware: [historyApiFallback]
+      },
+      port: 8000
+    });
+  });
 
 gulp.task('less', () => {
   gulp.src(paths.styles)
@@ -121,21 +130,6 @@ gulp.task('static-files', () => {
     .pipe(gulp.dest('public/'));
 });
 
-gulp.task('nodemon', () => {
-  nodemon({
-      script: 'server.js',
-      ext: 'js',
-      ignore: ['public/', 'node_modules/']
-    })
-    .on('change', ['lint'])
-    .on('restart', () => {
-      // when the app has restarted, run livereload.
-      gulp.src('server.js')
-        .pipe(livereload())
-        .pipe(notify('Reloading. please wait...'));
-    });
-});
-
 gulp.task('test:e2e', (cb) => {
   return gulp.src(['./tests/e2e/*.js'])
     .pipe(protractor({
@@ -163,9 +157,9 @@ gulp.task('test:unit', () => {
 });
 
 gulp.task('watch', () => {
-  gulp.watch(paths.jade, ['jade']);
-  gulp.watch(paths.styles, ['less']);
-  gulp.watch(paths.scripts, ['minifyJs']);
+  gulp.watch(paths.jade, ['jade']).on('change', browserSync.reload);
+  gulp.watch(paths.styles, ['less']).on('change', browserSync.reload);
+  gulp.watch(paths.scripts, ['minifyJs']).on('change', browserSync.reload);
 });
 
 gulp.task('build', ['bower', 'jade', 'less', 'static-files',
@@ -173,5 +167,5 @@ gulp.task('build', ['bower', 'jade', 'less', 'static-files',
 ]);
 
 gulp.task('heroku', ['build']);
-gulp.task('test', ['test:unit', 'test:e2e', 'coveralls']);
-gulp.task('default', ['nodemon', 'watch', 'build']);
+gulp.task('test', ['test:unit', 'test:e2e']);
+gulp.task('default', ['serve', 'watch', 'build']);

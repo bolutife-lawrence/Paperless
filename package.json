@@ -26,14 +26,11 @@
     "gulp-bower": "0.0.10",
     "gulp-chmod": "^1.3.0",
     "gulp-concat": "^2.6.0",
-    "gulp-di": "0.0.1",
     "gulp-imagemin": "^2.3.0",
     "gulp-jade": "^1.1.0",
     "gulp-karma": "0.0.4",
     "gulp-less": "^3.0.5",
-    "gulp-livereload": "^3.8.1",
     "gulp-minify": "0.0.5",
-    "gulp-nodemon": "^2.0.4",
     "gulp-notify": "^2.2.0",
     "gulp-path": "^2.0.0",
     "gulp-protractor": "^1.0.0",
@@ -57,5 +54,10 @@
     "sinon": "^1.17.2",
     "stringify": "^3.1.0",
     "vinyl-source-stream": "^1.1.0"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.11.1",
+    "connect-history-api-fallback": "^1.1.0",
+    "gulp-connect": "^3.1.0"
   }
 }
