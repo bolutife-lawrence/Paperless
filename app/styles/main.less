@@ -630,9 +630,11 @@ footer {
 
         md-virtual-repeat-container {
           height: 500px;
+          width: 400px;
           display: flex;
           align-items: center;
           justify-content: center;
+          flex-wrap: wrap;
           .thumb {
             width: 50px;
             height: 50px;
@@ -643,11 +645,6 @@ footer {
             border-radius: 50%;
 
             float: left;
-          }
-          .user-info {
-            float: right;
-            margin: 13px 0;
-            text-align: end;
           }
           .featured-user {
             display: inline-block;

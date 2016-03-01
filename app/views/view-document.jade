@@ -7,18 +7,18 @@
       span {{viewDoc.title}}
 
     md-fab-speed-dial.md-scale.md-fab-top-right(
-      ng-if="hasPrivilege()", 
-      ng-hide="hidden", 
-      md-direction="left", 
-      md-open="isOpen", 
-      ng-class="{ \"md-hover-full\": hover }", 
-      ng-mouseenter="isOpen=true", 
+      ng-if="hasPrivilege()",
+      ng-hide="hidden",
+      md-direction="left",
+      md-open="isOpen",
+      ng-class="{ \"md-hover-full\": hover }",
+      ng-mouseenter="isOpen=true",
       ng-mouseleave="isOpen=false")
 
       md-fab-trigger
         md-button.md-fab.md-raised.md-mini.doc-menu(aria-label="Document options")
           md-tooltip(
-            md-direction="top", 
+            md-direction="top",
             md-visible="tooltipVisible") Options
           md-icon
             i.fa.fa-ellipsis-v
@@ -26,11 +26,11 @@
       md-fab-actions
         div(ng-repeat="item in menuItems")
           md-button.md-fab.md-raised.md-mini.doc-menu-options(
-            aria-label="{{item.name}}", 
+            aria-label="{{item.name}}",
             ng-click="callFunction(item.action)")
             md-tooltip(
-              md-direction="{{item.direction}}", 
-              md-visible="tooltipVisible", 
+              md-direction="{{item.direction}}",
+              md-visible="tooltipVisible",
               md-autohide="false")
               | {{item.name}}
             md-icon(aria-label="{{item.name}}")
@@ -45,17 +45,17 @@
       md-divider
       .doc-owner
         span.small-text
-          em created by 
+          em created by
           span {{docOwner}}
       .doc-stats
-        span.small-text 
-          em created 
+        span.small-text
+          em created
           span {{viewDoc.createdAt | momentFromNow}} &nbsp;
         span.small-text
-          em modified 
+          em modified
           span {{viewDoc.updatedAt | momentFromNow}}
 
-      div    
+      div
         ul.tags
           li(ng-repeat="role in viewDoc.roles")
             span.tag.small-text {{role.title}}
@@ -71,9 +71,8 @@
           span {{noFeaturedUsersMsg}}
 
         div(md-virtual-repeat="user in featuredUsers")
+          md-tooltip
+            span.small-text(ng-if="user.name") {{user.name.last + " " + user.name.first}}
           .featured-user
             img.thumb(ng-src="{{user.img_url}}")
             .user-info
-              span.small-text(ng-if="user.name") {{user.name.last + " " + user.name.first}}
-              br
-              span.small-text(ng-if="user.email") {{user.email}}
