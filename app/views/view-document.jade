@@ -3,6 +3,9 @@
   .view-doc-header
 
     h3
+      i.fa.fa-bars.menu-icon(
+        hide-gt-md, 
+        ng-click="toggleNav()") &nbsp;&nbsp;&nbsp;
       i.fa.fa-arrow-circle-o-left.back-icon(ui-sref="dashboard.user-documents.own")
       span {{viewDoc.title}}
 
@@ -38,8 +41,10 @@
 
     md-divider
 
-  div(layout="row")
-    div(flex="60")
+  div(layout="row", 
+    layout-sm="column")
+    div(flex="60",
+      flex-sm=100)
       .doc-content
         span {{viewDoc.content}}
       md-divider
@@ -60,17 +65,18 @@
           li(ng-repeat="role in viewDoc.roles")
             span.tag.small-text {{role.title}}
 
-    .featured-users-section(flex="30")
+    .featured-users-section(flex="30", 
+      flex-sm=100)
       h3.featured-users-title People who can see this document
 
-      md-virtual-repeat-container
+      .featured-users-container
 
         .no-docs-msg-container(ng-if="featuredUsers.length < 1")
           .icon-holder
             i.fa.fa-meh-o.fa-5x
           span {{noFeaturedUsersMsg}}
 
-        div(md-virtual-repeat="user in featuredUsers")
+        div(ng-repeat="user in featuredUsers")
           md-tooltip
             span.small-text(ng-if="user.name") {{user.name.last + " " + user.name.first}}
           .featured-user

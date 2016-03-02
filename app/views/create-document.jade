@@ -2,8 +2,11 @@ md-bottom-sheet(
   ng-controller="docCtrl", 
   ng-init="initSelectedRoles()")
 
-  div(
+  .bottom-sheet-container(
     layout="column",
+    layout-xs="column", 
+    layout-sm="column",
+    flex-sm="90",
     layout-align="center center")
     span.small-text.white-color press "ESC" to exit this view.
     .create-doc-form
@@ -16,9 +19,16 @@ md-bottom-sheet(
 
       div(
         layout="row", 
+        layout-xs="column", 
+        layout-sm="column",
         layout-align="start start")
 
-        div(flex=70)
+        .input(
+          flex=70,
+          flex-sm=100,
+          layout="column",
+          layout-sm="column",
+          flex-order-sm="1")
           md-input-container.md-block
             label Title
             input(
@@ -35,8 +45,11 @@ md-bottom-sheet(
               md-maxlength="1000", 
               rows="14")
 
-        div(
-          layout="column", 
+        .roles(
+          layout="column",
+          layout-sm="column",
+          flex-order-sm="2",
+          flex-sm=100,
           flex=30)
           span.small-text.white-color.text-center Assign roles to this document
 

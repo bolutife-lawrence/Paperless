@@ -126,7 +126,6 @@ a {
 
   line-height: 26px;
 }
-
 .tag::before {
   position: absolute;
   top: 10px;
@@ -141,7 +140,6 @@ a {
   background: rgba(4, 99, 128, 0.9);
   box-shadow: inset 0 1px rgba(0, 0, 0, 0.25);
 }
-
 .tag::after {
   position: absolute;
   top: 0;
@@ -168,7 +166,6 @@ a {
 
   border: 3px solid rgba(4, 99, 128, 0.2);
   border-radius: 50%;
-
   i:hover {
     zoom: 2;
 
@@ -343,11 +340,11 @@ md-input-container:not(md-input-invalid).md-input-focused {
 
 footer {
   position: fixed;
-   color: rgba(255, 255, 255, 0.7);
-   font-size: 0.66em;
-   bottom: 10px;
-   left: 50%;
-   transform: translateX(-50%);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.66em;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
 
   .emphasize {
     color: rgba(255, 255, 255, 0.3);
@@ -627,17 +624,17 @@ footer {
       .featured-users-section {
         text-align: center;
         margin: auto;
+        max-height: 500px;
 
-        md-virtual-repeat-container {
-          height: 500px;
+        .featured-users-container {
           display: flex;
-          align-items: center;
-          justify-content: center;
+          align-items: flex-start;;
+          justify-content: flex-start;
           flex-wrap: wrap;
+          overflow-y: auto;
           .thumb {
-            width: 50px;
-            height: 50px;
-            padding: 8px 0;
+            width: 40px;
+            height: 40px;
 
             border-radius: 50%;
           }
@@ -656,7 +653,6 @@ footer {
     max-width: 75%!important;
     max-height: 70%!important;
     margin: auto;
-
     md-input-container:not(md-input-invalid).md-input-focused {
       label {
         color: #046380!important;
@@ -666,9 +662,6 @@ footer {
 
         color: #046380!important;
       }
-    }
-    md-progress-linear {
-      margin-bottom: 15px;
     }
     .form-content {
       padding: 30px;
@@ -720,9 +713,8 @@ footer {
     background-color: rgba(4, 99, 128, 0.2)!important;
     .create-doc {
       position: fixed;
-      top: 90%;
-      right: 2%;
-      left: 94%;
+      right: 0;
+      bottom: 0;
 
       transition: 0.5s ease-out all;
 
@@ -761,12 +753,10 @@ footer {
 md-bottom-sheet {
   position: fixed;
 
-  height: 100%;
   max-height: 100%;
   padding: 5%;
 
   background-color: rgba(4, 99, 128, 0.9);
-
   md-input-container:not(md-input-invalid).md-input-focused {
     label {
       color: #FFFFFF!important;
@@ -778,7 +768,7 @@ md-bottom-sheet {
     }
   }
   .create-doc-form {
-    width: 70%;
+    width: 100%;
     height: 50%!important;
     max-height: 50%!important;
     margin: 3%;
@@ -821,8 +811,6 @@ md-bottom-sheet {
       border-width: 0 0 0!important;
     }
     textarea {
-      overflow-x: scroll!important;
-
       max-height: 350px;
 
       color: #FFFFFF!important;
@@ -851,7 +839,6 @@ md-bottom-sheet {
   margin: 5px;
 
   color: #046380;
-
   i:hover {
     zoom: 1.5;
   }
@@ -883,8 +870,6 @@ md-bottom-sheet {
   vertical-align: middle;
 
   color: #046380;
-  .icon-holder {
-  }
   span {
     font-family: 'Lato';
     font-weight: bolder;
@@ -892,5 +877,44 @@ md-bottom-sheet {
   }
   i {
     opacity: 0.3;
+  }
+}
+
+@media(max-width: 600px) {
+  .search-field {
+    width: 145px;
+    font-size: 11px;
+  }
+
+  .docs-header {
+    height: 120px!important;
+  }
+
+  .bottom-sheet-container {
+    margin: auto;
+    width: 100%;
+  }
+
+  md-bottom-sheet {
+    overflow-y: scroll;
+  }
+
+  .featured-users-title {
+    font-size: 0.8em;
+  }
+
+  .input {
+    width: 100%;
+  }
+
+  .roles {
+    width: 100%;
+  }
+
+  .form-content {
+    .line {
+      display: none;
+    }
+    text-align: center;
   }
 }

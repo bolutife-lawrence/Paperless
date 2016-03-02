@@ -70,12 +70,38 @@ export default angular.module('paperless.controllers')
       };
 
       $scope.getFeaturedUsers = () => {
-        let _roles = $scope.viewDoc.roles.map((role) => role._id);
-        Users.featuredUsers(_roles, (err, res) => {
-          if (!err) {
-            $scope.featuredUsers = res.data.users.docs;
-          }
-        });
+        // let _roles = $scope.viewDoc.roles.map((role) => role._id);
+        // Users.featuredUsers(_roles, (err, res) => {
+        //   if (!err) {
+        //     $scope.featuredUsers = res.data.users.docs;
+        //   }
+        // });
+
+        $scope.featuredUsers = [{
+          img_url: 'http://res.cloudinary.com/dms/image/upload/c_scale,h_275,q_98,' +
+            'r_30/v1453209823/default_avatar_fnm9wb.gif'
+        }, {
+          img_url: 'http://res.cloudinary.com/dms/image/upload/c_scale,h_275,q_98,' +
+            'r_30/v1453209823/default_avatar_fnm9wb.gif'
+        }, {
+          img_url: 'http://res.cloudinary.com/dms/image/upload/c_scale,h_275,q_98,' +
+            'r_30/v1453209823/default_avatar_fnm9wb.gif'
+        }, {
+          img_url: 'http://res.cloudinary.com/dms/image/upload/c_scale,h_275,q_98,' +
+            'r_30/v1453209823/default_avatar_fnm9wb.gif'
+        },{
+          img_url: 'http://res.cloudinary.com/dms/image/upload/c_scale,h_275,q_98,' +
+            'r_30/v1453209823/default_avatar_fnm9wb.gif'
+        }, {
+          img_url: 'http://res.cloudinary.com/dms/image/upload/c_scale,h_275,q_98,' +
+            'r_30/v1453209823/default_avatar_fnm9wb.gif'
+        }, {
+          img_url: 'http://res.cloudinary.com/dms/image/upload/c_scale,h_275,q_98,' +
+            'r_30/v1453209823/default_avatar_fnm9wb.gif'
+        }, {
+          img_url: 'http://res.cloudinary.com/dms/image/upload/c_scale,h_275,q_98,' +
+            'r_30/v1453209823/default_avatar_fnm9wb.gif'
+        }];
       };
 
       $scope.getSelectedRoles = () => {
@@ -215,7 +241,7 @@ export default angular.module('paperless.controllers')
 
         Documents.save($scope.newDoc, () => {
           $state.go('dashboard.user-documents.own', {}, {
-            reload:true
+            reload: true
           });
           $mdBottomSheet.hide();
 

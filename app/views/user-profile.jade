@@ -1,3 +1,8 @@
+.menu-icon
+  i.fa.fa-bars(
+    hide-gt-md,
+    ng-click="toggleNav()")
+  
 .user-profile(
   layout="column",
   layout-align"center center",
@@ -45,35 +50,35 @@
 
       p
 
-      section(layout="row")
+      section
+        div(layout="row", layout-xs="column", layout-sm="column")
+          md-input-container.md-block
+            md-icon
+              i.fa.fa-user
+            input(
+              ng-model="currentUser.name.last",
+              name="lastname",
+              type="text",
+              ng-minlength="2",
+              ng-maxlength="50",
+              ng-required="{{!currentUser.name.last}}",
+              ng-pattern="/^[A-z]+$/",
+              placeholder="Lastname",
+              aria-label="Lastname")
 
-        md-input-container.md-block
-          md-icon
-            i.fa.fa-user
-          input(
-            ng-model="currentUser.name.last",
-            name="lastname",
-            type="text",
-            ng-minlength="2",
-            ng-maxlength="50",
-            ng-required="{{!currentUser.name.last}}",
-            ng-pattern="/^[A-z]+$/",
-            placeholder="Lastname",
-            aria-label="Lastname")
-
-        md-input-container.md-block
-          md-icon
-            i.fa.fa-user
-          input(
-            ng-model="currentUser.name.first",
-            name="firstname",
-            type="text",
-            ng-minlength="2",
-            ng-maxlength="50",
-            ng-required="{{!currentUser.name.first}}",
-            ng-pattern="/^[A-z]+$/",
-            placeholder="Firstname",
-            aria-label="Firstname")
+          md-input-container.md-block
+            md-icon
+              i.fa.fa-user
+            input(
+              ng-model="currentUser.name.first",
+              name="firstname",
+              type="text",
+              ng-minlength="2",
+              ng-maxlength="50",
+              ng-required="{{!currentUser.name.first}}",
+              ng-pattern="/^[A-z]+$/",
+              placeholder="Firstname",
+              aria-label="Firstname")
 
       md-input-container.md-block
         md-icon
