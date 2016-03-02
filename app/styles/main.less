@@ -334,7 +334,7 @@ md-input-container:not(md-input-invalid).md-input-focused {
   width: 100%;
   height: 100%;
 
-  background-color: #046380;
+  background: linear-gradient(#2697BA , #046380 );
   background-size: contain;
 }
 
@@ -628,7 +628,7 @@ footer {
 
         .featured-users-container {
           display: flex;
-          align-items: flex-start;;
+          align-items: flex-start;
           justify-content: flex-start;
           flex-wrap: wrap;
           overflow-y: auto;
@@ -897,6 +897,15 @@ md-bottom-sheet {
 
   md-bottom-sheet {
     overflow-y: scroll;
+    padding: 79px 0;
+
+    md-virtual-repeat-container {
+      height: 200px!important;
+    }
+
+    textarea {
+      height: 200px;
+    }
   }
 
   .featured-users-title {
@@ -916,5 +925,11 @@ md-bottom-sheet {
       display: none;
     }
     text-align: center;
+  }
+
+  .docs-header {
+    .menu-icon {
+      position: absolute;
+    }
   }
 }
